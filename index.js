@@ -5,10 +5,10 @@ document.addEventListener('DOMContentLoaded',
     function(){
         // 사용할 DOM 선언하기 : getElementById, querySelector
 const chatLog = document.getElementById('chat-log');
-const userInput = document.getElementById('ueser-input');
+const userInput = document.getElementById('user-input');
 const sendButton = document.getElementById('send-button');
 const buttonIcon = document.getElementById('button-icon');
-const info = document.querySelector('info');
+const info = document.querySelector('.info');
 
 
 
@@ -21,6 +21,7 @@ sendButton.addEventListener('click', sendMessage); //함수 호출할때는 send
 function sendMessage(){
     // 1. 받아온 값 저장하기 : trim()함수 사용
     const message = userInput.value.trim();
+    //console.log(message);
 
     // 2. 공백만 입력받았을 때 send하지 않기
 
@@ -28,22 +29,25 @@ function sendMessage(){
         return
     }else{  //message가 비어있지 않다면
         appendMessage('user', message);
-        
+       // userInput.value = '';
+
         setTimeout(() => {
             appendMessage('bot', 'Made By Jeonghoon\n');
             //사용자 & 봇의 메세지 전다이 끝나면 전송 버튼으로 바꾼다.
             buttonIcon.classList.add('fa-solid', 'fa-paper-plane');
             buttonIcon.classList.remove('fas', 'fa-spinner', 'fa-pulse');
         }, 1000); //1000은 1초
-        return
+        //return
     }
     // 3. 사용자가 입력한 message 화면에 띄우기(container)
+
+
 }
 
 function appendMessage(sender, message){ //sender가 user인지 bot인지에 따라 다름
     info.style.display = 'none';
 
-    // 사용자 & 봇이 메세지를 전송할 떄에는 로딩 아이콘을 사용한다.
+    // 사용자 & 봇이 메세지를 전송할 때에는 로딩 아이콘을 사용한다.
     buttonIcon.classList.add('fas', 'fa-spinner', 'fa-pulse');
     buttonIcon.classList.remove('fa-solid', 'fa-paper-plane');
 
@@ -72,6 +76,8 @@ function appendMessage(sender, message){ //sender가 user인지 bot인지에 따
     chatElement.appendChild(iconElement); // 전체 채팅 박스에 아이콘 박스 추가
     chatElement.appendChild(messageElement); // #chat-log에 전체 채팅 박스 연결 : 화면에 표시하는 기능
     chatLog.appendChild(chatElement); // 
+    console.log(chatLog);
+    
 }
     });
 
